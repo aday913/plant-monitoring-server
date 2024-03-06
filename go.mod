@@ -1,6 +1,6 @@
 module github.com/aday913/plant-monitoring-server
 
-go 1.21.5
+go 1.21
 
 require (
 	github.com/apapsch/go-jsonmerge/v2 v2.0.0 // indirect
