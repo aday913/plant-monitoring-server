@@ -4,8 +4,8 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
-  "strconv"
 	"net/http"
+	"strconv"
 
 	_ "github.com/mattn/go-sqlite3"
 )
@@ -13,7 +13,7 @@ import (
 var db *sql.DB
 
 func main() {
-  var err error
+	var err error
 	db, err = sql.Open("sqlite3", "/home/aday/databases/myfirstdb.db")
 	if err != nil {
 		log.Fatal("Error opening database: ", err)
@@ -21,7 +21,7 @@ func main() {
 	defer db.Close()
 
 	http.HandleFunc("/moisture/", handleGetById)
-  http.HandleFunc("/moisture", handleGetAll)
+	http.HandleFunc("/moisture", handleGetAll)
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
@@ -32,7 +32,7 @@ func handleGetAll(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 		return
 	}
-	defer rows.Close() 
+	defer rows.Close()
 
 	writeData(w, rows)
 }
@@ -45,7 +45,7 @@ func handleGetById(w http.ResponseWriter, r *http.Request) {
 	}
 
 	row := db.QueryRow("SELECT id, plant_name, moisture_level FROM moisture_readings WHERE id = ?", id)
-	writeData(w, row) 
+	writeData(w, row)
 }
 
 func writeData(w http.ResponseWriter, data interface{}) {
